@@ -3,7 +3,27 @@
 //   return document.getElementsByClassName(className);
 // };
 
-// But in stead we're going to implement it from scratch:
+// But instead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
-  // your code here
+  var collection = [];
+  var currentNodes = document.body.childNodes;
+
+  var forEach = Array.prototype.forEach;
+
+  function check(nodes) {
+	  forEach.call(nodes, function(nodeChild) {
+	  	if (nodeChild.classList.contains(className)) {
+	  		collection.push(nodeChild);
+	  	}
+
+	  	if (nodeChild.hasChildNodes()) {
+	  		check(nodeChild.childNodes);
+	  	}
+	  });  	
+  }
+
+  check(currentNodes);
+  
+  return collection;
+
 };
