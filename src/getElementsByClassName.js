@@ -8,22 +8,22 @@ var getElementsByClassName = function (className) {
   var collection = [];
   var currentNodes = document.body.childNodes;
 
-  var forEach = Array.prototype.forEach;
-
   function check(nodes) {
-	  forEach.call(nodes, function(nodeChild) {
-	  	if (nodeChild.classList.contains(className)) {
-	  		collection.push(nodeChild);
-	  	}
+  	for (var i = 0; i < nodes.length; i++) {
+  		var node = nodes[i];
 
-	  	if (nodeChild.hasChildNodes()) {
-	  		check(nodeChild.childNodes);
+  		if (node.classList && node.classList.contains(className)) {
+  			collection.push(node);
+  		}
+
+	  	if (node.hasChildNodes()) {
+	  		check(node.childNodes);
 	  	}
-	  });  	
+	 }
   }
 
   check(currentNodes);
-  
+
   return collection;
 
 };
